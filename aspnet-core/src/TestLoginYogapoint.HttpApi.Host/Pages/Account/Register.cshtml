@@ -14,14 +14,16 @@
 @using Volo.Abp.Settings
 
 @model CustomRegistrationModel
-
+@*@inject BasicTheme basic*@
 @inject IHtmlLocalizer<AccountResource> L
 @inject Volo.Abp.Settings.ISettingProvider SettingProvider
 
-@{
+@*@{
     ViewData["Title"]="Register";
-   
-}
+    Layout = basic.GetLayout("Register.cshmtl");
+
+
+}*@
 <head>
     <link rel="stylesheet" href="../Pages/Account/Register.css">
 
@@ -36,15 +38,22 @@
                     <h2 style="margin-top: -31px">Sign Up</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-floating">
-                        <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" />
-                        <label>PhoneNumber</label>
-                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                    </div>
 
                     <div class="form-floating">
+                        <input asp-for="Input.Name" class="form-control" aria-required="true" />
+                        <label>FirstName</label>
+                        <span asp-validation-for="Input.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating">
+                        <input asp-for="Input.Surname" class="form-control" aria-required="true" />
+                        <label>Surname</label>
+                        <span asp-validation-for="Input.Surname" class="text-danger"></span>
+                    </div>
+
+                  
+                    <div class="form-floating">
                         <input asp-for="Input.UserName" class="form-control" hidden aria-required="true" />
-                        <label>PhoneNumber</label>
+                       
                         <span asp-validation-for="Input.UserName" class="text-danger"></span>
                     </div>
                     

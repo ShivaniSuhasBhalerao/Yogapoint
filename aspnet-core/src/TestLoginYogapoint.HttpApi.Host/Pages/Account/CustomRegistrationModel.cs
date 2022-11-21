@@ -28,17 +28,21 @@ namespace TestLoginYogapoint.Pages.Account
         public CustomRegistrationModel(IAccountAppService accountAppService) : base(accountAppService)
         {
             Input = new();
+            Input.Name = Faker.Name.First();
+            Input.Surname = Faker.Name.Last();
             Input.UserName = Faker.Name.First();
-            Input.PhoneNumber = Faker.RandomNumber.Next(10).ToString();
+           
             Input.EmailAddress = Faker.Internet.Email(Input.UserName);
             Input.Gender = (char)Faker.Enum.Random<Gender>();
         }
 
         public class IdentityUserExtraProperties : IdentityUser
         {
-            public IdentityUserExtraProperties(Guid id, string userName, string email, string _PhoneNumber, Guid? tenantId = null) : base(id, userName, email, tenantId)
+            public IdentityUserExtraProperties(Guid id, string userName, string email,string _Name,string _Surname, Guid? tenantId = null) : base(id, userName, email, tenantId)
             {
-                PhoneNumber = _PhoneNumber;
+               
+                Name = _Name;
+                Surname = _Surname;
             }
         }
         protected override async Task RegisterLocalUserAsync()
@@ -51,9 +55,11 @@ namespace TestLoginYogapoint.Pages.Account
                     AppName = "MVC",
                     EmailAddress = Input.EmailAddress,
                     Password = Input.Password,
-                    UserName = Input.EmailAddress,
-                    PhoneNumber = Input.PhoneNumber,
+                    UserName = Input.Name,
+                
                     Gender = Input.Gender,
+                    Name= Input.Name,
+                    Surname=Input.Surname,
 
 
                 }
@@ -69,7 +75,7 @@ namespace TestLoginYogapoint.Pages.Account
 
             await IdentityOptions.SetAsync();
 
-            var user = new IdentityUserExtraProperties(GuidGenerator.Create(), input.UserName, input.EmailAddress, input.PhoneNumber, CurrentTenant.Id);
+            var user = new IdentityUserExtraProperties(GuidGenerator.Create(), input.UserName, input.EmailAddress,input.Name,input.Surname, CurrentTenant.Id);
 
 
             user.SetProperty(AbpUserExtraProperties.GenderPropertyTitle, input.Gender.ToString());
@@ -94,7 +100,11 @@ namespace TestLoginYogapoint.Pages.Account
 
 
         public char Gender { get; set; }
-        public string PhoneNumber { get; set; }
+       
+
+        public string Name { get; set; }
+        public string Surname { get; set; }
+
     }
 
 
@@ -114,6 +124,13 @@ namespace TestLoginYogapoint.Pages.Account
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
-        public string PhoneNumber { get; set; }
+     
+
+        [Required]
+        public string Name { get; set; }
+
+        public string Surname { get; set; }
+
+
     }
 }
