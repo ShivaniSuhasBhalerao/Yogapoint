@@ -1,0 +1,11 @@
+﻿.container {
+    background-color: black;
+}
+.card {
+   margin-left:-129px;
+   width:962px;
+}
+#registerSubmit {
+    background-color: #F87400;
+    color:white
+}
