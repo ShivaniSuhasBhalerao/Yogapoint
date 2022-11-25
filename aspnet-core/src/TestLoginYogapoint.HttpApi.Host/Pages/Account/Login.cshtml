@@ -3,20 +3,11 @@
 @addTagHelper *, Volo.Abp.AspNetCore.Mvc.UI
 @addTagHelper *, Volo.Abp.AspNetCore.Mvc.UI.Bootstrap
 @addTagHelper *, Volo.Abp.AspNetCore.Mvc.UI.Bundling
-
-
-
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Volo.Abp.Account.Localization
 @using Volo.Abp.Account.Settings
 @using Volo.Abp.Settings
-
-
-
 @model TestLoginYogapoint.Pages.Account.CustomLoginModel
-
-
-
 @inject IHtmlLocalizer<AccountResource> L
 @inject Volo.Abp.Settings.ISettingProvider SettingProvider
 <head>
@@ -67,17 +58,15 @@
         {
             <div class="mt-2">
                 <h5>@L["OrLoginWith"]</h5>
-                <form asp-page="./Login" asp-page-handler="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" asp-route-returnUrlHash="@Model.ReturnUrlHash" method="post">
+                <form asp-page="./Login" asp-page-handler="ExternalLogin" asp-route-returnUrl="@Model.ExternalProviders" asp-route-returnUrlHash="@Model.ReturnUrlHash" method="post">
                     <input asp-for="ReturnUrl" />
                     <input asp-for="ReturnUrlHash" />
                     @foreach (var provider in Model.VisibleExternalProviders)
                     {
-                       @* <button type="submit" class="btn btn-primary m-1" name="provider" value="@provider.AuthenticationScheme" title="@L["GivenTenantIsNotAvailable", provider.DisplayName]">@provider.DisplayName</button>*@
-                      
-                     
-                    }
-                    <button class="btn" value="LinkedIn" title="LinkedIn" name="provider" style="background-color:white;border:none"><i style='font-size:24px;color:#0072b1' class='fab'>&#xf08c;</i></button>
-                    <button class="btn" value="Google" title="Google" name="provider" style="background-color:black;border:none"><i style='font-size:24px;color:#0072b1' class='fab'>&#xf08c;</i></button>
+                  <button type="submit" class="btn btn-primary m-1" name="provider" value="@provider.AuthenticationScheme" title="@L["GivenTenantIsNotAvailable", provider.DisplayName]">@provider.DisplayName</button>
+                   }
+                   @* <button class="btn" value="LinkedIn" title="LinkedIn" name="provider" style="background-color:white;border:none"><i style='font-size:24px;color:#0072b1' class='fab'>&#xf08c;</i></button>
+                    <button class="btn" value="Google" title="Google" name="provider" style="background-color:black;border:none"><i style='font-size:24px;color:#0072b1' class='fab'>&#xf08c;</i></button>*@
                 </form>
             </div>
         }
@@ -90,3 +79,4 @@
         }
     </div>
 </div>
+

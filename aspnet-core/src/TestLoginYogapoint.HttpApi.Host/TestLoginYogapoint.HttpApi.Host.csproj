@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Abp.MailKit" Version="7.4.0" />
     <PackageReference Include="AspNet.Security.OAuth.LinkedIn" Version="6.0.10" />
     <PackageReference Include="Faker.Net" Version="2.0.154" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.10" />
@@ -41,8 +42,6 @@
     <None Remove="Logs\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Pages\Account\CustomLoginModel.cs" />
-  </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties wwwroot_4libs_4abp_4utils_4abp-utils_1umd_1min_1js_1map__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

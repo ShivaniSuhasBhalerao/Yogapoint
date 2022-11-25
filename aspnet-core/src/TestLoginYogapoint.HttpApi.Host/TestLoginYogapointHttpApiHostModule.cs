@@ -82,9 +82,7 @@ public class TestLoginYogapointHttpApiHostModule : AbpModule
         .AddLinkedIn(linkedin =>
         {
 
-
-
-            linkedin.ClientId = "77iwoiyh7vf1g0";
+           linkedin.ClientId = "77iwoiyh7vf1g0";
             linkedin.ClientSecret = "G0MKBvfXo0Xzf7gA";
             linkedin.Scope.Remove("code");
             linkedin.SaveTokens = true;

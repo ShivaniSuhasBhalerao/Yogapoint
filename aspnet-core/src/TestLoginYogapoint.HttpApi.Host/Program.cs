@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Castle.Core.Smtp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
+using TestLoginYogapoint.Emailing;
+using Volo.Abp.Emailing;
 
 namespace TestLoginYogapoint;
 
@@ -27,6 +30,9 @@ public class Program
 
         try
         {
+            
+
+
             Log.Information("Starting TestLoginYogapoint.HttpApi.Host.");
             var builder = WebApplication.CreateBuilder(args);
             builder.Host.AddAppSettingsSecretsJson()

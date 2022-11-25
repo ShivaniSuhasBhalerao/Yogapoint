@@ -1,5 +1,4 @@
-﻿
-    @page
+﻿@page
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, Volo.Abp.AspNetCore.Mvc.UI
 @addTagHelper *, Volo.Abp.AspNetCore.Mvc.UI.Bootstrap
@@ -21,8 +20,6 @@
 @*@{
     ViewData["Title"]="Register";
     Layout = basic.GetLayout("Register.cshmtl");
-
-
 }*@
 <head>
     <link rel="stylesheet" href="../Pages/Account/Register.css">
@@ -34,10 +31,10 @@
 
         <div class="row">
             <div class="col-6">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                    <h2 style="margin-top: -31px">Sign Up</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h2 style="margin-top: -31px">Sign Up</h2>
+                    <hr />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-floating">
                         <input asp-for="Input.Name" class="form-control" aria-required="true" />
@@ -50,36 +47,36 @@
                         <span asp-validation-for="Input.Surname" class="text-danger"></span>
                     </div>
 
-                  
+
                     <div class="form-floating">
                         <input asp-for="Input.UserName" class="form-control" hidden aria-required="true" />
-                       
+
                         <span asp-validation-for="Input.UserName" class="text-danger"></span>
                     </div>
-                    
 
 
-           
-            <div class="form-check">
-                <input class="form-check-input" type="radio" asp-for="Input.Gender" value="M">
-                <label class="form-check-label" asp-for="Input.Gender">Male</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" asp-for="Input.Gender" value="F"> 
-                <label class="form-check-label" asp-for="Input.Gender">Female</label>
-            </div>
-                   
-            <div class="form-floating">
-                <input asp-for="Input.EmailAddress" class="form-control" autocomplete="new-email" aria-required="true" />
+
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="Input.Gender" value="M">
+                        <label class="form-check-label" asp-for="Input.Gender">Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" asp-for="Input.Gender" value="F">
+                        <label class="form-check-label" asp-for="Input.Gender">Female</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <input asp-for="Input.EmailAddress" class="form-control" autocomplete="new-email" aria-required="true" />
                         <label>Email</label>
-                <span asp-validation-for="Input.EmailAddress" class="text-danger"></span>
-            </div>
-                       
-            <div class="form-floating">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true"/>
+                        <span asp-validation-for="Input.EmailAddress" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                         <label>Password</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
 
                     <div>
                         <label asp-for="Input.ConfirmPassword">Confirm Password:</label>
@@ -87,19 +84,23 @@
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
 
-            
-            <button id="registerSubmit" type="submit"class="w-100 btn " onclick="checkPassword()">CREATE MY ACCOUNT</button>
-        </form>
-        </div>
-            <div class="col-1">
-              
-            </div>
-        <div class="col-5" id="parent">
 
-                
-            <img src="~/images/logo/leptonx/Login_Page_1.png" class="logo mt-5" alt="...">
+                    <button id="registerSubmit" type="submit" class="w-100 btn " onclick="checkPassword()">CREATE MY ACCOUNT</button>
+                </form>
+            </div>
+            <div class="col-1">
+            </div>
+            <div class="col-5" id="parent">
+
+
+                <img src="~/images/logo/leptonx/Login_Page_1.png" class="logo mt-5" alt="...">
+            </div>
         </div>
-        </div>
-       
-        </div>
+
+
+
     </div>
+</div>
+
+
+       
