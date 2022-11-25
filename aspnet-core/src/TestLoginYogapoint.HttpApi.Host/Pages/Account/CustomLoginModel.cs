@@ -40,7 +40,6 @@ namespace TestLoginYogapoint.Pages.Account
 
             return await Task.FromResult(Challenge(properties, provider));
         }
-
     }
 }
 

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
+using TestLoginYogapoint.Email;
 using TestLoginYogapoint.Emailing;
 using Volo.Abp.Emailing;
 
@@ -35,6 +36,7 @@ public class Program
 
             Log.Information("Starting TestLoginYogapoint.HttpApi.Host.");
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
                 .UseSerilog();

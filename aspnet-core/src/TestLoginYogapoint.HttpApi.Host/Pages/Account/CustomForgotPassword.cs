@@ -19,6 +19,9 @@ using static TestLoginYogapoint.Pages.Account.CustomRegistrationModel;
 using Volo.Abp.ObjectMapping;
 using Volo.Abp.Account.Settings;
 using Volo.Abp.Settings;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
+using TestLoginYogapoint.Email;
 
 namespace TestLoginYogapoint.Pages.Account
 {
@@ -28,11 +31,14 @@ namespace TestLoginYogapoint.Pages.Account
         protected IdentityUserManager _UserManager;
         protected IAccountEmailer AccountEmailer { get; }
 
+       
+
 
         public CustomForgotPassword(IdentityUserManager userManager,IAccountEmailer accountEmailer) : base()
         {
             _UserManager = userManager;
             AccountEmailer=accountEmailer;
+            
         }
         public override Task<IActionResult> OnGetAsync()
         {
@@ -47,10 +53,7 @@ namespace TestLoginYogapoint.Pages.Account
             {
                 throw new UserFriendlyException(L["Volo.Account:InvalidEmailAddress", email]);
             }
-
-          
-
-            return users;
+             return users;
         }
      
         public virtual async Task SendPasswordResetCodeAsync(SendPasswordResetCodeDto input)
@@ -60,11 +63,20 @@ namespace TestLoginYogapoint.Pages.Account
              await AccountEmailer.SendPasswordResetLinkAsync(user, resetToken, input.AppName, input.ReturnUrl, input.ReturnUrlHash);
         }
 
+        public virtual async Task ResetPasswordAsync(ResetPasswordDto input)
+        {
+            await IdentityOptions.SetAsync();
 
+            var user = await UserManager.GetByIdAsync(input.UserId);
+            (await UserManager.ResetPasswordAsync(user, input.ResetToken, input.Password)).CheckErrors();
 
-        
+            await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
+            {
+                Identity = IdentitySecurityLogIdentityConsts.Identity,
+                Action = IdentitySecurityLogActionConsts.ChangePassword
+            });
+        }
 
-   
 
         public override async Task<IActionResult> OnPostAsync()
         {
@@ -74,7 +86,7 @@ namespace TestLoginYogapoint.Pages.Account
                     new SendPasswordResetCodeDto
                     {
                         Email = Email,
-                        AppName = "MVC", //TODO: Const!
+                        AppName = "MVC",
                         ReturnUrl = ReturnUrl,
                         ReturnUrlHash = ReturnUrlHash
                     }
@@ -95,10 +107,6 @@ namespace TestLoginYogapoint.Pages.Account
                     returnUrlHash = ReturnUrlHash
                 });
         }
-
-
-
-
     }
     
 }

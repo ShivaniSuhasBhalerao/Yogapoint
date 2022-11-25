@@ -143,12 +143,12 @@ namespace TestLoginYogapoint.Pages.Account
         public override async Task<IActionResult> OnPostAsync()
         {
             var result = await base.OnPostAsync();
-           var user = await _identityUserRepository.FindByNormalizedEmailAsync(_lookupNormalizer.NormalizeEmail(Input.EmailAddress));
+            var user = await _identityUserRepository.FindByNormalizedEmailAsync(_lookupNormalizer.NormalizeEmail(Input.EmailAddress));
             user.Name = Input.Name;
             user.Surname = Input.Surname;
 
-         await _identityUserRepository.UpdateAsync(user);
-         return result;
+            await _identityUserRepository.UpdateAsync(user);
+            return result;
 
 
 

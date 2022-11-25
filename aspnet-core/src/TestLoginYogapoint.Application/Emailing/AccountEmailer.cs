@@ -11,11 +11,12 @@ using Volo.Abp.Account.Emailing.Templates;
 using Volo.Abp.Account.Emailing;
 using Volo.Abp.Account.Localization;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Emailing;
+
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.TextTemplating;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Identity;
+using TestLoginYogapoint.Email;
 
 namespace TestLoginYogapoint.Emailing
 {
@@ -23,23 +24,26 @@ namespace TestLoginYogapoint.Emailing
     public class AccountEmailer : IAccountEmailer, ITransientDependency
     {
         protected ITemplateRenderer TemplateRenderer { get; }
-        protected IEmailSender EmailSender { get; }
+        
         protected IStringLocalizer<AccountResource> StringLocalizer { get; }
         protected IAppUrlProvider AppUrlProvider { get; }
         protected ICurrentTenant CurrentTenant { get; }
+        public readonly IEmailService _emailService;
 
         public AccountEmailer(
-            IEmailSender emailSender,
+           
             ITemplateRenderer templateRenderer,
             IStringLocalizer<AccountResource> stringLocalizer,
             IAppUrlProvider appUrlProvider,
+            IEmailService emailService,
             ICurrentTenant currentTenant)
         {
-            EmailSender = emailSender;
+          
             StringLocalizer = stringLocalizer;
             AppUrlProvider = appUrlProvider;
             CurrentTenant = currentTenant;
             TemplateRenderer = templateRenderer;
+            _emailService = emailService;
         }
 
         public virtual async Task SendPasswordResetLinkAsync(
@@ -71,11 +75,11 @@ namespace TestLoginYogapoint.Emailing
                 new { link = link }
             );
 
-            await EmailSender.SendAsync(
-                user.Email,
-                StringLocalizer["PasswordReset"],
-                emailContent
-            );
+            //await EmailSender.SendAsync(
+            //    user.Email,
+            //    StringLocalizer["PasswordReset"],
+            //    emailContent
+            //);
         }
 
         protected virtual string NormalizeReturnUrl(string returnUrl)
