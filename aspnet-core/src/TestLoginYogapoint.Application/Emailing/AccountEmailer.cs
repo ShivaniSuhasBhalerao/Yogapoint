@@ -75,6 +75,9 @@ namespace TestLoginYogapoint.Emailing
                 new { link = link }
             );
 
+
+           await  _emailService.SendEmailAsync(new EmailData { EmailToName=user.Name,EmailSubject="Forgot Password" ,EmailToId = user.Email, EmailBody = emailContent });
+
             //await EmailSender.SendAsync(
             //    user.Email,
             //    StringLocalizer["PasswordReset"],

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using BOOKSTore.Email;
 using Castle.Core.Smtp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +38,7 @@ public class Program
             Log.Information("Starting TestLoginYogapoint.HttpApi.Host.");
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+            builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
                 .UseSerilog();
